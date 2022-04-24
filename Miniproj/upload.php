@@ -8,11 +8,14 @@
 $filename = $_FILES['file']['name'];
 
 $userID = $_POST["id"];
-echo($userID);
-#mkdir("$userID")
-#$location = "$userID/".$filename;
 
-$location = "filestorage/".$filename;
+if(!file_exists($userID)) {
+	mkdir("$userID");
+}
+
+$location = "$userID/".$filename;
+
+#$location = "filestorage/".$filename;
 
 if( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) {
 	echo 'File Upload: Success';}
@@ -30,6 +33,8 @@ else {
 	echo '<img src="img/image.png">';}
 
 #access folder
+#$myfiles = array_diff(scandir($userID), array('.', '..'));
+#echo $myfiles;
 ?>
 
 

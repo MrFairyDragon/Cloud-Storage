@@ -7,7 +7,8 @@
 
 $filename = $_FILES['file']['name'];
 
-#$userID = $_GET['id']
+$userID = $_POST["id"];
+echo($userID);
 #mkdir("$userID")
 #$location = "$userID/".$filename;
 

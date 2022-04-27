@@ -1,18 +1,30 @@
 <html>
 <body>
 
-<form action="login.php" method="post">
-			<input type="text" name="username" />
-			<input type="text" name="password"/>
-			<button>login</button>
-		
-</form>
 
-<form action="sign-up.php" method="post">
-			<input type="text" name="username" />
-			<input type="text" name="password"/>
-			<button>register</button>
-</form>
+<head>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
 
+<div class="login-container">
+	<p1>Username</p1>
+	<p2>Password</p2>
+	<form class="myformclass" action="login.php" method="post">
+		<input type="text" name="username" />
+		<input type="text" name="password"/>
+		<button>login</button>	
+	</form>
+
+	<form class="myformclass" action="sign-up.php" method="post">
+		<input type="text" name="username" />
+		<input type="text" name="password"/>
+		<button>register</button>
+	</form>
+</div>
+
+<div class="animation-container">
+	<img class="images" src="img/preview1.png">
+
+</div>
 </body>
 </html>

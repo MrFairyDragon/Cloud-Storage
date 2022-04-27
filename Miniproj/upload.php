@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 
 <html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
 <body>
 
 <?php
@@ -21,7 +26,7 @@ if( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) {
 	echo 'File Upload: Success';}
 else {
 	echo 'Error Uploading File';}
-	
+
 $seperateExt = explode('.', $filename);
 $getExt = strtolower(end($seperateExt));
 
@@ -33,10 +38,53 @@ else {
 	echo '<img src="img/image.png">';}
 
 #access folder
-#$myfiles = array_diff(scandir($userID), array('.', '..'));
-#echo $myfiles;
-?>
+$directories = array_diff(scandir($userID), array('..', '.'));
 
+$readExt = [];
+
+for($x = 2; $x <= count($directories); $x++) {
+	$readExt[$x] = explode('.', $directories[$x]);
+	$imagekey = $readExt[$x][1];
+		if(in_array($readExt[$x][1], array('doc', 'pdf', 'xls', 'xml', 'zip'))) {
+			echo "<img src='img/$imagekey.png'>";
+			}
+		else {
+			echo '<img src="img/image.png">';}
+
+
+}
+
+for($x = 2; $x <= count($directories); $x++) {
+	$directories[$x-2] = $directories[$x];
+}
+
+$numFiles = count($directories);
+
+?>
+<div class="container-1">
+	<p>Files Table</p>
+	<ul id="mainUL" class="files">
+	<li><a href="#"> <?php print_r($directories[0])?> </a></li>
+	<li><a href="#"> <?php print_r($directories[1])?> </a></li>
+	<li><a href="#"> <?php print_r($directories[2])?> </a></li>
+	<li><a href="#"> <?php print_r($directories[3])?> </a></li>
+	<li><a href="#"> <?php print_r($directories[4])?> </a></li>
+	<li><a href="#"> <?php print_r($directories[5])?> </a></li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+function function1() {
+  var ul = document.getElementById("mainUL");
+	var k = [];
+	for (let i = 0; i < <?php echo $numFiles ?>; i++) {
+  k[i] = document.createElement("li");
+  k[i].appendChild(document.createTextNode("<?php print_r($directories[i])?>"))
+  ul.appendChild(k[i]);
+  }
+}
+function1();
+</script>
 
 </body>
 </html>

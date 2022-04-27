@@ -1,4 +1,8 @@
 <?php
+session_start()
+?>
+
+<?php
 
 $host_name = "localhost";
 $user_name = "cloud";
@@ -6,7 +10,7 @@ $database_password = "yC)80a2((35JvEaX";
 $database = "cloudservice";
 $name = $_POST['username'];
 $password = $_POST['password'];
-    
+
 $connect = mysqli_connect($host_name, $user_name, $database_password, $database);
 if(mysqli_connect_error())
     echo '<p> "failed to connect to SQL Database" </p>';
@@ -29,8 +33,8 @@ if(mysqli_num_rows($result) == 1) {
     echo '<p> Succesfully found a user with that username and password loggin in </p>';
     mysqli_close($connect);
     $row = mysqli_fetch_row($result);
-    $id = $row[0];
-    header("Location: uploader.php?id=$id");
+    $_SESSION['id'] = $row[0];
+    header("Location: uploader.php");
     exit;
 } else {
     echo '<p> Failed to find user exitting </p>';

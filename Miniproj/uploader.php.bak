@@ -1,15 +1,77 @@
-<html>
-	<head>
-		<title> Uploader Page </title>
-	</head>
+<!DOCTYPE html>
 
-	<body>
-		<form action="upload.php" method="get" enctype="multipart/form-data">
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+
+<form <form method='post' action='uploader.php' enctype="multipart/form-data">
 			<input type="file" name="file" />
 			<input type="submit" value="Upload" />
-		
+			<input type="hidden" name="id" value="<?php echo !empty($_GET['id']) ?htmlspecialchars($_GET['id']) :''; ?>" />
 		</form>
-		
-	</body>
 
+<?php
+
+if(!empty($_FILES['files']['name'][0])) {
+	$filename = $_FILES['file']['name'];
+
+	$userID = $_POST["id"];
+
+	if(!file_exists($userID)) {
+		mkdir("$userID");
+	}
+
+	$location = "$userID/".$filename;
+
+	#$location = "filestorage/".$filename;
+
+	if( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) {
+		echo 'File Upload: Success';}
+	else {
+		echo 'Error Uploading File';}
+		
+	$seperateExt = explode('.', $filename);
+	$getExt = strtolower(end($seperateExt));
+
+	$img = "img/$getExt.png";
+
+	if(in_array($getExt, array('doc', 'pdf', 'xls', 'xml', 'zip'))) {
+		echo "<img src='$img'>";}
+	else {
+		echo '<img src="img/image.png">';}
+
+	#access folder
+	$directories = array_diff(scandir($userID), array('..', '.'));
+
+	$readExt = [];
+
+
+	for($x = 2; $x <= count($directories); $x++) {
+		$readExt[$x] = explode('.', $directories[$x]);
+		$imagekey = $readExt[$x][1];
+			if(in_array($readExt[$x][1], array('doc', 'pdf', 'xls', 'xml', 'zip'))) {
+				echo "<img src='img/$imagekey.png'>";
+				}
+			else {
+				echo '<img src="img/image.png">';}
+		
+	}
+
+	for($x = 2; $x <= count($directories); $x++) {
+		print_r($directories[$x]);
+	}
+}
+?>
+<div class="container-1">
+	<p>Files Table</p>
+	<ul class="files">
+
+	</ul>
+</div>
+
+</body>
 </html>

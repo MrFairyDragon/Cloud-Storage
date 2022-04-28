@@ -5,37 +5,16 @@ session_start()
 <!DOCTYPE html>
 
 <html>
-
 <head>
 	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
-
+<form <form method='post' action='uploader.php' enctype="multipart/form-data">
+			<input type="file" name="file" />
+			<input type="submit" value="Upload" />
+</form>
 <?php
-
-$filename = $_FILES['file']['name'];
-
-$userID = $_SESSION["id"];
-
-if(!file_exists($userID)) {
-	mkdir("$userID");
-}
-
-$location = "$userID/".$filename;
-
-#$location = "filestorage/".$filename;
-
-if( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) {
-	echo 'File Upload: Success';}
-else {
-	echo 'Error Uploading File';}
-
-$seperateExt = explode('.', $filename);
-$getExt = strtolower(end($seperateExt));
-
-$img = "img/$getExt.png";
-
 #if(in_array($getExt, array('doc', 'pdf', 'xls', 'xml', 'zip'))) {
 #	echo "<img src='$img'>";}
 #else {
@@ -43,6 +22,7 @@ $img = "img/$getExt.png";
 
 #scanning user's folder for files that are compared
 #with the other array and $directories is the difference
+$userID = $_SESSION['id'];
 $directories = array_diff(scandir($userID), array('..', '.'));
 $readExt = [];
 

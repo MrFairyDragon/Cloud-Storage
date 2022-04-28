@@ -1,12 +1,21 @@
-<html>
-	<head>
-		<title> Uploader Page </title>
-	</head>
-	<body>
-		<form <form method='post' action='upload.php' enctype="multipart/form-data">
-			<input type="file" name="file" />
-			<input type="submit" value="Upload" />
-			<input type="hidden" name="id" value="<?php echo !empty($_GET['id']) ?htmlspecialchars($_GET['id']) :''; ?>" />
-		</form>
-	</body>
-</html>
+<?php
+session_start();
+
+$filename = $_FILES['file']['name'];
+
+$userID = $_SESSION["id"];
+
+if(!file_exists($userID)) {
+	mkdir("$userID");
+}
+
+$location = "$userID/".$filename;
+
+#$location = "filestorage/".$filename;
+
+if( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) {
+	echo 'File Upload: Success';}
+else {
+	echo 'Error Uploading File';}
+header("location: upload.php")
+?>

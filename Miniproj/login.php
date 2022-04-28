@@ -34,7 +34,7 @@ if(mysqli_num_rows($result) == 1) {
     mysqli_close($connect);
     $row = mysqli_fetch_row($result);
     $_SESSION['id'] = $row[0];
-    header("Location: uploader.php");
+    header("Location: upload.php");
     exit;
 } else {
     echo '<p> Failed to find user exitting </p>';

@@ -22,12 +22,13 @@
 
                         if(successResponse == "success")
                         {
-                            alert("Success! " + this.responseText);
+                            //alert("Success! " + this.responseText);
                             window.location.href = "uploader.php";
                         }
                         else
                         {
-                            alert("Failed to login: " + this.responseText);
+                            //alert("Failed to login: " + this.responseText);
+                            alert("Wrong username/password, please try again");
                         }
                     }
                 }
@@ -53,10 +54,10 @@
             <input type="submit" name= "login" value = "Log in" id="loginButton">
         </form>
 
-        <form class="myformclass" method="post">
+        <form class="myformclass" method="post" action="sign-up.php">
             <input type="text" id="nameSignup" name="usernameSignUp" />
             <input type="text" id="passSignup" name="passwordSignUp" />
-            <button>register</button>
+            <button>Register</button>
         </form>
 </div>
 

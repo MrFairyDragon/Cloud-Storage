@@ -4,8 +4,8 @@ $host_name = "localhost";
 $user_name = "cloud";
 $database_password = "yC)80a2((35JvEaX";
 $database = "cloudservice";
-$name = $_POST['username'];
-$password = $_POST['password'];
+$name = $_POST['usernameSignUp'];
+$password = $_POST['passwordSignUp'];
     
 $connect = mysqli_connect($host_name, $user_name, $database_password, $database);
 if(mysqli_connect_error())

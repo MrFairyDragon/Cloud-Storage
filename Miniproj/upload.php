@@ -36,9 +36,12 @@ $readExt = [];
 #			echo '<img src="img/image.png">';}
 #}
 
-for($x = 2; $x < count($directories); $x++) {
-	$directories[$x-2] = $directories[$x];
-}
+#for($x = 2; $x < count($directories); $x++) {
+#	$directories[$x-2] = $directories[$x];
+#}
+
+
+
 $directories = array_unique($directories);
 
 $numFiles = count($directories);
@@ -65,7 +68,7 @@ $numFiles = count($directories);
 		var k = [];
 		var extensionNotImage = ['doc', 'pdf', 'xls', 'xml', 'zip'];
 		var extensionImage = ['jpg', 'png'];
-		for (let i = 0; i < <?php echo $numFiles ?>; i++) {
+		for (let i = 2; i < <?php echo $numFiles ?>+2; i++) {
 	  	k[i] = document.createElement("li");
 	  	k[i].appendChild(document.createTextNode(test[i]));
 	  	ul.appendChild(k[i]);
@@ -88,7 +91,9 @@ $numFiles = count($directories);
 </ul>
 </div>
 
-
+<form <form method='post' action='sign.php'>
+			<button>Sign Out</button>
+</form>
 
 </body>
 </html>

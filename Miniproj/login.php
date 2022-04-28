@@ -8,8 +8,8 @@ $host_name = "localhost";
 $user_name = "cloud";
 $database_password = "yC)80a2((35JvEaX";
 $database = "cloudservice";
-$name = $_POST['username'];
-$password = $_POST['password'];
+$name = $_REQUEST["name"];
+$password = $_REQUEST["pass"];
 
 $connect = mysqli_connect($host_name, $user_name, $database_password, $database);
 if(mysqli_connect_error())
@@ -30,17 +30,15 @@ $sql = "SELECT * FROM loginInformation WHERE username='$name' AND password='$pas
 
 $result = (mysqli_query($connect, $sql));
 if(mysqli_num_rows($result) == 1) {
-    echo '<p> Succesfully found a user with that username and password loggin in </p>';
-    mysqli_close($connect);
+    //echo '<p> Succesfully found a user with that username and password loggin in </p>';
     $row = mysqli_fetch_row($result);
     $_SESSION['id'] = $row[0];
-    header("Location: upload.php");
-    exit;
-} else {
-    echo '<p> Failed to find user exitting </p>';
     mysqli_close($connect);
-    header('Location: sign.php');
-    exit;
+    echo '.success';
+} else {
+    //echo '<p> Failed to find user exitting </p>';
+    mysqli_close($connect);
+    echo '.failed';
 }
 exit;
 

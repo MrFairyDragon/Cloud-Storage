@@ -23,7 +23,7 @@
                         if(successResponse == "success")
                         {
                             //alert("Success! " + this.responseText);
-                            window.location.href = "uploader.php";
+                            window.location.href = "upload.php";
                         }
                         else
                         {
